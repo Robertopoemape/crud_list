@@ -15,8 +15,18 @@ class HomeBlocPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
-          title: const Text("Tareas - Bloc")),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.blueAccent,
+        centerTitle: true,
+        title: const Text(
+          "Tareas - Bloc",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
           if (state.tasks.isEmpty) {
@@ -57,6 +67,7 @@ class HomeBlocPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        hoverColor: Colors.blue,
         onPressed: () => context.read<TaskBloc>().add(
               AddTask(
                 TaskModel(id: 0, title: "Nueva Tarea", description: ""),

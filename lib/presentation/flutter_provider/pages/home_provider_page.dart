@@ -16,40 +16,58 @@ class HomeProviderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+          foregroundColor: Colors.white,
           backgroundColor: Colors.blueAccent,
+          centerTitle: true,
           title: const Text(
             "Tareas - Provider",
-          )),
-      body: CardList(
-        listTask: listTask,
-        itemBuilder: (context, task) {
-          return CardListInfo(
-            task: task,
-            onChangedToggleTask: (value) {
-              context.read<TaskProvider>().toggleTask(task.id);
-            },
-            onPressedRemoveTask: () {
-              showDialogMessage(
-                  context: context,
-                  task: task,
-                  onPressed: () {
-                    context.read<TaskProvider>().removeTask(task.id);
-                    autoRouterPop(context);
-                  });
-            },
-            onPressedSaveTask: () => showEditTaskDialog(
-              context: context,
-              task: task,
-              onPressedSaveTask: (updatedTitle, updatedDescription) {
-                context.read<TaskProvider>().updateTask(
-                      task.id,
-                      updatedTitle,
-                      updatedDescription,
-                    );
-              },
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+              color: Colors.white,
             ),
-          );
-        },
+          )),
+      body: Column(
+        children: [
+          Expanded(
+            child: listTask.isEmpty
+                ? const Center(child: Text("No hay tareas"))
+                : CardList(
+                    listTask: listTask,
+                    itemBuilder: (context, task) {
+                      return CardListInfo(
+                        task: task,
+                        onChangedToggleTask: (value) {
+                          context.read<TaskProvider>().toggleTask(task.id);
+                        },
+                        onPressedRemoveTask: () {
+                          showDialogMessage(
+                              context: context,
+                              task: task,
+                              onPressed: () {
+                                context
+                                    .read<TaskProvider>()
+                                    .removeTask(task.id);
+                                autoRouterPop(context);
+                              });
+                        },
+                        onPressedSaveTask: () => showEditTaskDialog(
+                          context: context,
+                          task: task,
+                          onPressedSaveTask:
+                              (updatedTitle, updatedDescription) {
+                            context.read<TaskProvider>().updateTask(
+                                  task.id,
+                                  updatedTitle,
+                                  updatedDescription,
+                                );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () =>

@@ -16,8 +16,17 @@ class HomeRiverpodPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+          foregroundColor: Colors.white,
           backgroundColor: Colors.blueAccent,
-          title: const Text("Tareas - Riverpod")),
+          centerTitle: true,
+          title: const Text(
+            "Tareas - Riverpod",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+              color: Colors.white,
+            ),
+          )),
       body: Column(
         children: [
           Expanded(

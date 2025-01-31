@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 
 import '../../../models/task_model.dart';
@@ -14,7 +12,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
       final newId = currentTasks.length + 1;
 
-      log(newId.toString());
       final newTask = TaskModel(
         id: newId,
         title: event.task.title,
