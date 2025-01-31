@@ -16,6 +16,7 @@ class CardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        padding: EdgeInsets.only(top: 8),
         itemCount: listTask.length,
         itemBuilder: (context, index) => itemBuilder(
               context,

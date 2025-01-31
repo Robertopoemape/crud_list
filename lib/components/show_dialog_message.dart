@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/router/router.dart';
 import '../models/task_model.dart';
 
 void showDialogMessage(
@@ -23,7 +24,7 @@ void showDialogMessage(
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  autoRouterPop(context);
                 },
                 child: Text('No'),
               ),

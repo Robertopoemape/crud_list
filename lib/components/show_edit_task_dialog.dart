@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/router/router.dart';
 import '../models/task_model.dart';
 
 void showEditTaskDialog({
@@ -32,7 +33,7 @@ void showEditTaskDialog({
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => autoRouterPop(context),
             child: const Text('Cancelar'),
           ),
           ElevatedButton(
@@ -41,7 +42,7 @@ void showEditTaskDialog({
                 onPressedSaveTask(
                     titleController.text, descriptionController.text);
               }
-              Navigator.pop(context);
+              autoRouterPop(context);
             },
             child: const Text('Guardar'),
           ),

@@ -1,14 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../components/card_list.dart';
-import '../../../components/card_list_info.dart';
-import '../../../components/show_dialog_message.dart';
-import '../../../components/show_edit_task_dialog.dart';
-import '../blocs/task_bloc.dart';
-import '../blocs/task_event.dart';
-import '../blocs/task_state.dart';
+
+import '../../../components/components.dart';
+import '../../../core/core.dart';
 import '../../../models/task_model.dart';
+import '../blocs/blocs.dart';
 
 @RoutePage()
 class HomeBlocPage extends StatelessWidget {
@@ -17,7 +14,9 @@ class HomeBlocPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tareas - Bloc")),
+      appBar: AppBar(
+          backgroundColor: Colors.blueAccent,
+          title: const Text("Tareas - Bloc")),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
           if (state.tasks.isEmpty) {
@@ -36,7 +35,7 @@ class HomeBlocPage extends StatelessWidget {
                   task: task,
                   onPressed: () {
                     context.read<TaskBloc>().add(RemoveTask(task.id));
-                    Navigator.pop(context);
+                    autoRouterPop(context);
                   },
                 );
               },

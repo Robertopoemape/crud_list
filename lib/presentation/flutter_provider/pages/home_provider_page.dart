@@ -2,10 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../components/card_list.dart';
-import '../../../components/card_list_info.dart';
-import '../../../components/show_dialog_message.dart';
-import '../../../components/show_edit_task_dialog.dart';
+import '../../../components/components.dart';
+import '../../../core/router/router.dart';
 import '../providers/providers.dart';
 
 @RoutePage()
@@ -17,7 +15,11 @@ class HomeProviderPage extends StatelessWidget {
     final listTask = context.watch<TaskProvider>().tasks;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Tareas - Provider")),
+      appBar: AppBar(
+          backgroundColor: Colors.blueAccent,
+          title: const Text(
+            "Tareas - Provider",
+          )),
       body: CardList(
         listTask: listTask,
         itemBuilder: (context, task) {
@@ -32,7 +34,7 @@ class HomeProviderPage extends StatelessWidget {
                   task: task,
                   onPressed: () {
                     context.read<TaskProvider>().removeTask(task.id);
-                    Navigator.pop(context);
+                    autoRouterPop(context);
                   });
             },
             onPressedSaveTask: () => showEditTaskDialog(

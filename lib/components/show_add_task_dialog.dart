@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/router/router.dart';
+
 void showAddTaskDialog({
   required BuildContext context,
   required Function(String title, String description) onPressedAddTask,
@@ -26,20 +28,16 @@ void showAddTaskDialog({
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => autoRouterPop(context),
             child: const Text("Cancelar"),
           ),
           ElevatedButton(
             onPressed: () {
               if (titleController.text.isNotEmpty) {
-                /*  ref.read(taskProvider.notifier).addTask(
-                        titleController.text,
-                        descriptionController.text,
-                      );*/
                 onPressedAddTask(
                     titleController.text, descriptionController.text);
               }
-              Navigator.pop(context);
+              autoRouterPop(context);
             },
             child: const Text("Agregar"),
           ),

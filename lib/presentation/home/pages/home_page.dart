@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../components/components.dart';
 import '../../../core/router/router.dart';
 
 @RoutePage()
@@ -10,27 +11,40 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        title: Text(
+          'Manejadores de estado',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: Colors.white,
+          ),
+        ),
+        elevation: 4,
+        centerTitle: true,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            Button(
               onPressed: () {
                 autoRouterPush(context, HomeBlocRoute());
               },
-              child: Text('Bloc'),
+              label: 'Bloc',
             ),
-            ElevatedButton(
+            Button(
               onPressed: () {
                 autoRouterPush(context, HomeProviderRoute());
               },
-              child: Text('provider'),
+              label: 'Provider',
             ),
-            ElevatedButton(
+            Button(
               onPressed: () {
                 autoRouterPush(context, HomeRiverpodRoute());
               },
-              child: Text('Riverpod'),
+              label: 'Riverpod',
             ),
           ],
         ),

@@ -2,11 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../components/card_list.dart';
-import '../../../components/card_list_info.dart';
-import '../../../components/show_add_task_dialog.dart';
-import '../../../components/show_dialog_message.dart';
-import '../../../components/show_edit_task_dialog.dart';
+import '../../../components/components.dart';
 import '../../../core/router/router.dart';
 import '../notifiers/task_notifier.dart';
 
@@ -19,7 +15,9 @@ class HomeRiverpodPage extends ConsumerWidget {
     final tasks = ref.watch(taskProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Tareas - Riverpod")),
+      appBar: AppBar(
+          backgroundColor: Colors.blueAccent,
+          title: const Text("Tareas - Riverpod")),
       body: Column(
         children: [
           Expanded(
