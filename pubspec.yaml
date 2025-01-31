@@ -1,0 +1,31 @@
+name: crud_list
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  bloc: ^9.0.0
+  flutter_riverpod: ^2.6.1
+  provider: ^6.1.2
+  flutter_bloc: ^9.0.0
+  auto_route: ^9.3.0+1
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  auto_route_generator: ^9.3.1
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
