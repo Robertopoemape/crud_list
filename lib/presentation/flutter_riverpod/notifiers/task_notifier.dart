@@ -7,21 +7,31 @@ class TaskNotifier extends StateNotifier<List<TaskModel>> {
   final TaskStorage _storage;
 
   TaskNotifier(this._storage) : super([]) {
-    _loadTasks();
+    _init();
   }
 
-  void _loadTasks() {
+  Future<void> _init() async {
+    try {
+      await _storage.init();
+      _refreshState();
+    } catch (e) {
+      print('Error al inicializar TaskNotifier: $e');
+    }
+  }
+
+  void _refreshState() {
     state = _storage.getTasks();
   }
 
   void addTask(String title, String description) {
     final newTask = TaskModel(
-      id: state.length + 1,
+      id: DateTime.now().millisecondsSinceEpoch,
       title: title,
       description: description,
+      isCompleted: false,
     );
     _storage.addTask(newTask);
-    state = [..._storage.getTasks()];
+    _refreshState();
   }
 
   void updateTask(int id, String newTitle, String newDescription) {
@@ -32,7 +42,7 @@ class TaskNotifier extends StateNotifier<List<TaskModel>> {
         description: newDescription,
       );
       _storage.updateTask(index, updatedTask);
-      state = [..._storage.getTasks()];
+      _refreshState();
     }
   }
 
@@ -43,7 +53,7 @@ class TaskNotifier extends StateNotifier<List<TaskModel>> {
         isCompleted: !state[index].isCompleted,
       );
       _storage.updateTask(index, updatedTask);
-      state = [..._storage.getTasks()];
+      _refreshState();
     }
   }
 
@@ -51,11 +61,11 @@ class TaskNotifier extends StateNotifier<List<TaskModel>> {
     final index = state.indexWhere((task) => task.id == id);
     if (index != -1) {
       _storage.deleteTask(index);
-      state = [..._storage.getTasks()];
+      _refreshState();
     }
   }
 }
 
 final taskProvider = StateNotifierProvider<TaskNotifier, List<TaskModel>>(
-  (ref) => TaskNotifier(TaskStorage()),
+  (ref) => TaskNotifier(TaskStorage('tasks_riverpod')),
 );

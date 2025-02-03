@@ -4,13 +4,12 @@ import 'package:crud_list/data/local/task_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart' as provider;
 
+import 'core/router/router.dart';
 import 'models/task_model.dart';
 import 'presentation/flutter_bloc/blocs/task_bloc.dart';
-import 'core/router/router.dart';
 import 'presentation/flutter_provider/providers/task_provider.dart';
 
 final appRouter = MicroAppRouter();
@@ -21,27 +20,37 @@ void main() async {
     await Hive.initFlutter();
     Hive.registerAdapter(TaskModelAdapter());
 
-    await TaskStorage().init();
+    final taskStorageRiverpod = TaskStorage("tasks_riverpod");
+    final taskStorageBloc = TaskStorage("tasks_bloc");
+    final taskStorageProvider = TaskStorage("tasks_provider");
+
+    await Future.wait([
+      taskStorageRiverpod.init(),
+      taskStorageBloc.init(),
+      taskStorageProvider.init(),
+    ]);
+
     log('Hive inicializado correctamente', name: 'main');
+
+    runApp(
+      ProviderScope(
+        child: provider.MultiProvider(
+          providers: [
+            provider.ChangeNotifierProvider(
+              create: (_) => TaskProvider(),
+            ),
+          ],
+          child: BlocProvider(
+            create: (context) => TaskBloc(taskStorageBloc),
+            child: const MyApp(),
+          ),
+        ),
+      ),
+    );
   } catch (e, stackTrace) {
     log('Error al inicializar Hive: $e',
         name: 'main', error: e, stackTrace: stackTrace);
-    return;
   }
-
-  runApp(
-    ProviderScope(
-      child: provider.MultiProvider(
-        providers: [
-          provider.ChangeNotifierProvider(create: (_) => TaskProvider()),
-        ],
-        child: BlocProvider(
-          create: (context) => TaskBloc(),
-          child: const MyApp(),
-        ),
-      ),
-    ),
-  );
 }
 
 class MyApp extends StatelessWidget {

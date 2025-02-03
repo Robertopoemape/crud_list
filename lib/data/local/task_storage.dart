@@ -1,33 +1,35 @@
 import 'package:hive/hive.dart';
+
 import '../../models/task_model.dart';
 
 class TaskStorage {
-  static final TaskStorage _instance = TaskStorage._internal();
-  late Box<TaskModel> _taskBox;
+  final String boxName;
+  late Box<TaskModel> _box;
 
-  factory TaskStorage() {
-    return _instance;
-  }
-
-  TaskStorage._internal();
+  TaskStorage(this.boxName);
 
   Future<void> init() async {
-    _taskBox = await Hive.openBox<TaskModel>('tasks');
+    _box = await Hive.openBox<TaskModel>(boxName);
   }
 
-  List<TaskModel> getTasks() {
-    return _taskBox.values.toList();
-  }
+  List<TaskModel> getTasks() => _box.values.toList();
 
-  void addTask(TaskModel task) {
-    _taskBox.add(task);
-  }
+  void addTask(TaskModel task) => _box.add(task);
 
-  void updateTask(int index, TaskModel updatedTask) {
-    _taskBox.putAt(index, updatedTask);
+  void updateTask(int index, TaskModel task) {
+    if (index >= 0 && index < _box.length) {
+      _box.putAt(index, task);
+    }
   }
 
   void deleteTask(int index) {
-    _taskBox.deleteAt(index);
+    if (index >= 0 && index < _box.length) {
+      _box.deleteAt(index);
+    }
+  }
+
+  void updateTasks(List<TaskModel> tasks) {
+    _box.clear();
+    _box.addAll(tasks);
   }
 }

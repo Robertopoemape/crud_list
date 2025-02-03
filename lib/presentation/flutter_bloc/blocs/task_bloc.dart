@@ -1,52 +1,60 @@
 import 'package:bloc/bloc.dart';
 
+import '../../../data/local/task_storage.dart';
 import '../../../models/task_model.dart';
 import 'task_event.dart';
 import 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  TaskBloc() : super(TaskInitial()) {
-    on<AddTask>((event, emit) {
-      final currentTasks =
-          (state is TaskLoaded) ? (state as TaskLoaded).tasks : <TaskModel>[];
+  final TaskStorage _storage;
 
-      final newId = currentTasks.length + 1;
+  TaskBloc(this._storage) : super(TaskInitial(_storage.getTasks())) {
+    on<AddTask>(_onAddTask);
+    on<ToggleTask>(_onToggleTask);
+    on<RemoveTask>(_onRemoveTask);
+    on<UpdateTask>(_onUpdateTask);
+  }
 
-      final newTask = TaskModel(
-        id: newId,
-        title: event.task.title,
-        description: event.task.description,
+  void _onAddTask(AddTask event, Emitter<TaskState> emit) {
+    final newTask = TaskModel(
+      id: DateTime.now().millisecondsSinceEpoch,
+      title: event.task.title,
+      description: event.task.description,
+    );
+    _storage.addTask(newTask);
+    emit(TaskLoaded(_storage.getTasks()));
+  }
+
+  void _onToggleTask(ToggleTask event, Emitter<TaskState> emit) {
+    final updatedTasks = _storage.getTasks().map((task) {
+      if (task.id == event.id) {
+        return task.copyWith(isCompleted: !task.isCompleted);
+      }
+      return task;
+    }).toList();
+    _storage.updateTasks(updatedTasks);
+    emit(TaskLoaded(updatedTasks));
+  }
+
+  void _onRemoveTask(RemoveTask event, Emitter<TaskState> emit) {
+    final tasks = _storage.getTasks();
+    final index = tasks.indexWhere((task) => task.id == event.id);
+    if (index != -1) {
+      _storage.deleteTask(index);
+      emit(TaskLoaded(_storage.getTasks()));
+    }
+  }
+
+  void _onUpdateTask(UpdateTask event, Emitter<TaskState> emit) {
+    final tasks = _storage.getTasks();
+    final index = tasks.indexWhere((task) => task.id == event.id);
+    if (index != -1) {
+      final updatedTask = tasks[index].copyWith(
+        title: event.title,
+        description: event.description,
       );
-      final updatedTasks = <TaskModel>[...currentTasks, newTask];
-
-      emit(TaskLoaded(updatedTasks));
-    });
-
-    on<ToggleTask>((event, emit) {
-      final updatedTasks = state.tasks.map((task) {
-        if (task.id == event.id) {
-          return task.copyWith(isCompleted: !task.isCompleted);
-        }
-        return task;
-      }).toList();
-      emit(TaskLoaded(updatedTasks));
-    });
-
-    on<RemoveTask>((event, emit) {
-      final updatedTasks =
-          state.tasks.where((task) => task.id != event.id).toList();
-      emit(TaskLoaded(updatedTasks));
-    });
-
-    on<UpdateTask>((event, emit) {
-      final updatedTasks = state.tasks.map((task) {
-        if (task.id == event.id) {
-          return task.copyWith(
-              title: event.title, description: event.description);
-        }
-        return task;
-      }).toList();
-      emit(TaskLoaded(updatedTasks));
-    });
+      _storage.updateTask(index, updatedTask);
+      emit(TaskLoaded(_storage.getTasks()));
+    }
   }
 }
