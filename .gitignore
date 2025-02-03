@@ -11,12 +11,22 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+**.g.dart
 
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
+
+.vscode/
+
+
+# Ignorar archivos de configuración de Xcode para macOS
+macos/Release.xcconfig
+macos/Flutter-Debug.xcconfig
+macos/Flutter-Release.xcconfig
+macos/GeneratedPluginRegistrant.swift
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line

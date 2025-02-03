@@ -31,7 +31,9 @@ class HomeRiverpodPage extends ConsumerWidget {
         children: [
           Expanded(
             child: tasks.isEmpty
-                ? const Center(child: Text("No hay tareas"))
+                ? const Center(
+                    child: Text("No hay tareas"),
+                  )
                 : CardList(
                     listTask: tasks,
                     itemBuilder: (context, task) => CardListInfo(
@@ -46,7 +48,7 @@ class HomeRiverpodPage extends ConsumerWidget {
                               onPressed: () async {
                                 ref
                                     .read(taskProvider.notifier)
-                                    .deletedTask(task.id);
+                                    .deleteTask(task.id);
                                 await autoRouterPopWithAwait(context);
                               });
                         },

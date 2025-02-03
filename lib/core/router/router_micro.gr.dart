@@ -1,4 +1,3 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -22,7 +21,10 @@ import 'package:crud_list/presentation/home/pages/home_page.dart' as _i2;
 /// [_i1.HomeBlocPage]
 class HomeBlocRoute extends _i5.PageRouteInfo<void> {
   const HomeBlocRoute({List<_i5.PageRouteInfo>? children})
-    : super(HomeBlocRoute.name, initialChildren: children);
+      : super(
+          HomeBlocRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'HomeBlocRoute';
 
@@ -38,7 +40,10 @@ class HomeBlocRoute extends _i5.PageRouteInfo<void> {
 /// [_i2.HomePage]
 class HomeRoute extends _i5.PageRouteInfo<void> {
   const HomeRoute({List<_i5.PageRouteInfo>? children})
-    : super(HomeRoute.name, initialChildren: children);
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'HomeRoute';
 
@@ -54,7 +59,10 @@ class HomeRoute extends _i5.PageRouteInfo<void> {
 /// [_i3.HomeProviderPage]
 class HomeProviderRoute extends _i5.PageRouteInfo<void> {
   const HomeProviderRoute({List<_i5.PageRouteInfo>? children})
-    : super(HomeProviderRoute.name, initialChildren: children);
+      : super(
+          HomeProviderRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'HomeProviderRoute';
 
@@ -70,7 +78,10 @@ class HomeProviderRoute extends _i5.PageRouteInfo<void> {
 /// [_i4.HomeRiverpodPage]
 class HomeRiverpodRoute extends _i5.PageRouteInfo<void> {
   const HomeRiverpodRoute({List<_i5.PageRouteInfo>? children})
-    : super(HomeRiverpodRoute.name, initialChildren: children);
+      : super(
+          HomeRiverpodRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'HomeRiverpodRoute';
 

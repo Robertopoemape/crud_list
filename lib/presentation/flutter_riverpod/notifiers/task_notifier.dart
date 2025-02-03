@@ -1,9 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../data/local/task_storage.dart';
 import '../../../models/task_model.dart';
 
 class TaskNotifier extends StateNotifier<List<TaskModel>> {
-  TaskNotifier() : super([]);
+  final TaskStorage _storage;
+
+  TaskNotifier(this._storage) : super([]) {
+    _loadTasks();
+  }
+
+  void _loadTasks() {
+    state = _storage.getTasks();
+  }
 
   void addTask(String title, String description) {
     final newTask = TaskModel(
@@ -11,37 +20,42 @@ class TaskNotifier extends StateNotifier<List<TaskModel>> {
       title: title,
       description: description,
     );
-    state = [...state, newTask];
+    _storage.addTask(newTask);
+    state = [..._storage.getTasks()];
   }
 
   void updateTask(int id, String newTitle, String newDescription) {
-    state = state.map((task) {
-      if (task.id == id) {
-        return TaskModel(
-          id: task.id,
-          title: newTitle,
-          description: newDescription,
-        );
-      }
-      return task;
-    }).toList();
+    final index = state.indexWhere((task) => task.id == id);
+    if (index != -1) {
+      final updatedTask = state[index].copyWith(
+        title: newTitle,
+        description: newDescription,
+      );
+      _storage.updateTask(index, updatedTask);
+      state = [..._storage.getTasks()];
+    }
   }
 
   void toggleTask(int id) {
-    state = state.map((task) {
-      if (task.id == id) {
-        return task.copyWith(isCompleted: !task.isCompleted);
-      }
-
-      return task;
-    }).toList();
+    final index = state.indexWhere((task) => task.id == id);
+    if (index != -1) {
+      final updatedTask = state[index].copyWith(
+        isCompleted: !state[index].isCompleted,
+      );
+      _storage.updateTask(index, updatedTask);
+      state = [..._storage.getTasks()];
+    }
   }
 
-  void deletedTask(int id) {
-    state = state.where((task) => task.id != id).toList();
+  void deleteTask(int id) {
+    final index = state.indexWhere((task) => task.id == id);
+    if (index != -1) {
+      _storage.deleteTask(index);
+      state = [..._storage.getTasks()];
+    }
   }
 }
 
 final taskProvider = StateNotifierProvider<TaskNotifier, List<TaskModel>>(
-  (ref) => TaskNotifier(),
+  (ref) => TaskNotifier(TaskStorage()),
 );
