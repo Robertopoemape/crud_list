@@ -26,21 +26,24 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void _onToggleTask(ToggleTask event, Emitter<TaskState> emit) {
-    final updatedTasks = _storage.getTasks().map((task) {
-      if (task.id == event.id) {
-        return task.copyWith(isCompleted: !task.isCompleted);
-      }
-      return task;
-    }).toList();
-    _storage.updateTasks(updatedTasks);
-    emit(TaskLoaded(updatedTasks));
+    final tasks = _storage.getTasks();
+
+    final taskIndex = tasks.indexWhere((task) => task.id == event.id);
+    if (taskIndex != -1) {
+      final updatedTask =
+          tasks[taskIndex].copyWith(isCompleted: !tasks[taskIndex].isCompleted);
+
+      _storage.updateTask(taskIndex, updatedTask);
+      emit(TaskLoaded(_storage.getTasks()));
+    }
   }
 
   void _onRemoveTask(RemoveTask event, Emitter<TaskState> emit) {
     final tasks = _storage.getTasks();
-    final index = tasks.indexWhere((task) => task.id == event.id);
-    if (index != -1) {
-      _storage.deleteTask(index);
+
+    final taskIndex = tasks.indexWhere((task) => task.id == event.id);
+    if (taskIndex != -1) {
+      _storage.deleteTask(taskIndex);
       emit(TaskLoaded(_storage.getTasks()));
     }
   }
