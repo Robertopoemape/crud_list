@@ -21,12 +21,8 @@ migrate_working_dir/
 
 .vscode/
 
+**/GeneratedPluginRegistrant.swift
 
-# Ignorar archivos de configuración de Xcode para macOS
-macos/Release.xcconfig
-macos/Flutter-Debug.xcconfig
-macos/Flutter-Release.xcconfig
-macos/GeneratedPluginRegistrant.swift
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
