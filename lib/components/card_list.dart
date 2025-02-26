@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/task_model.dart';
+import '../core/core.dart';
+import '../data/models/task_model.dart';
 
 class CardList extends StatelessWidget {
   const CardList({
@@ -16,7 +17,7 @@ class CardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: EdgeInsets.only(top: 8),
+        padding: EdgeInsets.only(top: ds8),
         itemCount: listTask.length,
         itemBuilder: (context, index) => itemBuilder(
               context,

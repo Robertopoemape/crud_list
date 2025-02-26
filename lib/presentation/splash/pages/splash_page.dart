@@ -18,6 +18,7 @@ class SplashPageState extends State<SplashPage> {
     Future.delayed(
       Duration(seconds: ints3),
       () {
+        if (!mounted) return;
         autoRouterPush(context, HomeRoute());
       },
     );

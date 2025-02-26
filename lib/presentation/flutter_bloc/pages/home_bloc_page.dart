@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../components/components.dart';
 import '../../../core/core.dart';
-import '../../../models/task_model.dart';
+import '../../../data/models/task_model.dart';
 import '../blocs/blocs.dart';
 
 @RoutePage()
@@ -19,9 +19,9 @@ class HomeBlocPage extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
         title: const Text(
-          "Tareas - Bloc",
+          'Tareas - Bloc',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: ds20,
             fontWeight: FontWeight.w900,
             color: Colors.white,
           ),
@@ -30,7 +30,7 @@ class HomeBlocPage extends StatelessWidget {
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
           if (state.tasks.isEmpty) {
-            return const Center(child: Text("No hay tareas"));
+            return const Center(child: Text('No hay tareas'));
           }
           return CardList(
             listTask: state.tasks,
@@ -70,7 +70,7 @@ class HomeBlocPage extends StatelessWidget {
         hoverColor: Colors.blue,
         onPressed: () => context.read<TaskBloc>().add(
               AddTask(
-                TaskModel(id: 0, title: "Nueva Tarea", description: ""),
+                TaskModel(id: ints0, title: 'Nueva Tarea', description: ''),
               ),
             ),
         child: const Icon(Icons.add),

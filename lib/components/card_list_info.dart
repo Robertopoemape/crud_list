@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/task_model.dart';
+import '../core/core.dart';
+import '../data/models/task_model.dart';
 
 class CardListInfo extends StatelessWidget {
   const CardListInfo({
@@ -19,11 +20,11 @@ class CardListInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: ds16, vertical: ds4),
       child: ListTile(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: const BorderSide(color: Colors.blue, width: 2),
+          side: const BorderSide(color: Colors.blue, width: ds2),
         ),
         tileColor: task.isCompleted
             ? Colors.lightGreenAccent
@@ -35,7 +36,7 @@ class CardListInfo extends StatelessWidget {
               task.title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: ds18,
                 height: 1.1,
                 decoration:
                     task.isCompleted ? TextDecoration.lineThrough : null,
@@ -44,7 +45,7 @@ class CardListInfo extends StatelessWidget {
             Text(
               task.description,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: ds14,
                 decoration:
                     task.isCompleted ? TextDecoration.lineThrough : null,
               ),
@@ -59,12 +60,6 @@ class CardListInfo extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.edit),
               onPressed: onPressedSaveTask,
-
-              /* () => showEditTaskDialog(
-                context: context,
-                task: task,
-                onPressedSaveTask: () {},
-              ),*/
             ),
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),

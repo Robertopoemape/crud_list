@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../components/components.dart';
-import '../../../core/router/router.dart';
+import '../../../core/core.dart';
 import '../notifiers/task_notifier.dart';
 
 @RoutePage()
@@ -20,9 +20,9 @@ class HomeRiverpodPage extends ConsumerWidget {
           backgroundColor: Colors.blueAccent,
           centerTitle: true,
           title: const Text(
-            "Tareas - Riverpod",
+            'Tareas - Riverpod',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: ds20,
               fontWeight: FontWeight.w900,
               color: Colors.white,
             ),
@@ -32,7 +32,7 @@ class HomeRiverpodPage extends ConsumerWidget {
           Expanded(
             child: tasks.isEmpty
                 ? const Center(
-                    child: Text("No hay tareas"),
+                    child: Text('No hay tareas'),
                   )
                 : CardList(
                     listTask: tasks,
@@ -71,7 +71,7 @@ class HomeRiverpodPage extends ConsumerWidget {
                   ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(ds16),
             child: ElevatedButton(
               onPressed: () => showAddTaskDialog(
                 context: context,
@@ -82,7 +82,7 @@ class HomeRiverpodPage extends ConsumerWidget {
                       );
                 },
               ),
-              child: const Text("Agregar Tarea"),
+              child: const Text('Agregar Tarea'),
             ),
           ),
         ],

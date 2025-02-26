@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../core/router/router.dart';
-import '../models/task_model.dart';
+import '../core/core.dart';
+import '../data/models/task_model.dart';
 
 void showDialogMessage(
     {required BuildContext context,
@@ -14,7 +14,7 @@ void showDialogMessage(
         title: const Text(
           'Estas seguro que desea eliminar',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: ds20,
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,

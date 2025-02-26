@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../components/components.dart';
-import '../../../core/router/router.dart';
+import '../../../core/core.dart';
 import '../providers/providers.dart';
 
 @RoutePage()
@@ -20,9 +20,9 @@ class HomeProviderPage extends StatelessWidget {
           backgroundColor: Colors.blueAccent,
           centerTitle: true,
           title: const Text(
-            "Tareas - Provider",
+            'Tareas - Provider',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: ds20,
               fontWeight: FontWeight.w900,
               color: Colors.white,
             ),
@@ -31,7 +31,7 @@ class HomeProviderPage extends StatelessWidget {
         children: [
           Expanded(
             child: listTask.isEmpty
-                ? const Center(child: Text("No hay tareas"))
+                ? const Center(child: Text('No hay tareas'))
                 : CardList(
                     listTask: listTask,
                     itemBuilder: (context, task) {
@@ -71,7 +71,7 @@ class HomeProviderPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
-            context.read<TaskProvider>().addTask('Nueva Tarea', 'asdasda'),
+            context.read<TaskProvider>().addNewTask('Nueva Tarea', 'asdasda'),
         child: const Icon(Icons.add),
       ),
     );

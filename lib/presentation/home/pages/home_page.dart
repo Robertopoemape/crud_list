@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/components.dart';
-import '../../../core/router/router.dart';
+import '../../../core/core.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -12,11 +12,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.blueAccent,
         title: Text(
           'Manejadores de estado',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: ds20,
             fontWeight: FontWeight.w900,
             color: Colors.white,
           ),

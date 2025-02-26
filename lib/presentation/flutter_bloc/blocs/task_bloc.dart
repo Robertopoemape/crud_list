@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
-import '../../../data/local/task_storage.dart';
-import '../../../models/task_model.dart';
+import '../../../data/models/task_model.dart';
+import '../../../data/sources/task_storage.dart';
 import 'task_event.dart';
 import 'task_state.dart';
 

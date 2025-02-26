@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-import '../../../data/local/task_storage.dart';
-import '../../../models/task_model.dart';
+import '../../../data/models/task_model.dart';
+import '../../../data/sources/task_storage.dart';
+import '../../../domain/entities/task.dart';
+import '../../../domain/usecases/add_task_usecase.dart';
+import '../../../domain/usecases/get_task_usecase.dart';
 
 class TaskProvider with ChangeNotifier {
-  final TaskStorage _storage;
-  List<TaskModel> _tasks = [];
-
-  TaskProvider() : _storage = TaskStorage("tasks_provider") {
+  TaskProvider() {
     _init();
   }
+
+  final TaskStorage _storage = GetIt.I<TaskStorage>(instanceName: "provider");
+  final GetTask _getTasksUseCase =
+      GetIt.I<GetTask>(instanceName: "providerGetTask");
+  final AddTask _addTaskUseCase =
+      GetIt.I<AddTask>(instanceName: "providerAddTask");
+  List<TaskModel> _tasks = [];
 
   Future<void> _init() async {
     try {
@@ -20,21 +28,22 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
-  void _refreshTasks() {
-    _tasks = _storage.getTasks();
+  Future<void> _refreshTasks() async {
+    final domainTasks = await _getTasksUseCase();
+    _tasks = domainTasks.map((task) => TaskModel.fromDomain(task)).toList();
     notifyListeners();
   }
 
   List<TaskModel> get tasks => _tasks;
 
-  void addTask(String title, String description) {
-    final newTask = TaskModel(
+  Future<void> addNewTask(String title, String description) async {
+    final newTask = Task(
       id: DateTime.now().millisecondsSinceEpoch,
       title: title,
       description: description,
       isCompleted: false,
     );
-    _storage.addTask(newTask);
+    await _addTaskUseCase(newTask);
     _refreshTasks();
   }
 

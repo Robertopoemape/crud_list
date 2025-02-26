@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/local/task_storage.dart';
-import '../../../models/task_model.dart';
+import '../../../data/models/task_model.dart';
+import '../../../data/sources/task_storage.dart';
 
 class TaskNotifier extends StateNotifier<List<TaskModel>> {
   final TaskStorage _storage;

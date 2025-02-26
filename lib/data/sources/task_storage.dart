@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../../models/task_model.dart';
+import '../models/task_model.dart';
 
 class TaskStorage {
   final String boxName;
