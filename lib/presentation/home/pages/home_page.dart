@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
           children: [
             Button(
               onPressed: () {
-                autoRouterPush(context, HomeBlocRoute());
+                autoRouterPush(context, HomeCubitRoute());
               },
               label: 'Bloc',
             ),

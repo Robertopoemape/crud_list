@@ -11,7 +11,7 @@ class MicroAppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRoute.page, initial: true),
         AutoRoute(page: HomeRoute.page),
-        AutoRoute(page: HomeBlocRoute.page),
+        AutoRoute(page: HomeCubitRoute.page),
         AutoRoute(page: HomeProviderRoute.page),
         AutoRoute(page: HomeRiverpodRoute.page),
       ];

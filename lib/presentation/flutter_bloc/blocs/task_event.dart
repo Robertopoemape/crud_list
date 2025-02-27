@@ -1,9 +1,9 @@
-import '../../../data/models/task_model.dart';
+import '../../../domain/entities/task.dart';
 
 abstract class TaskEvent {}
 
 class AddTask extends TaskEvent {
-  final TaskModel task;
+  final Task task;
   AddTask(this.task);
 }
 
@@ -24,3 +24,5 @@ class UpdateTask extends TaskEvent {
 
   UpdateTask(this.id, this.title, this.description);
 }
+
+class LoadTasks extends TaskEvent {}

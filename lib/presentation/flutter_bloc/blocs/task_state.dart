@@ -1,7 +1,7 @@
 import '../../../data/models/task_model.dart';
 
 abstract class TaskState {
-  List<TaskModel> get tasks => [];
+  List<TaskModel> get tasks;
 }
 
 class TaskInitial extends TaskState {
@@ -12,9 +12,15 @@ class TaskInitial extends TaskState {
 }
 
 class TaskLoaded extends TaskState {
-  final List<TaskModel> taskList;
-  TaskLoaded(this.taskList);
+  @override
+  final List<TaskModel> tasks;
+  TaskLoaded(this.tasks);
+}
+
+class TaskError extends TaskState {
+  final String message;
+  TaskError(this.message);
 
   @override
-  List<TaskModel> get tasks => taskList;
+  List<TaskModel> get tasks => [];
 }

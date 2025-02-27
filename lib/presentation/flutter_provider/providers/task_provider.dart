@@ -14,9 +14,10 @@ class TaskProvider with ChangeNotifier {
 
   final TaskStorage _storage = GetIt.I<TaskStorage>(instanceName: "provider");
   final GetTask _getTasksUseCase =
-      GetIt.I<GetTask>(instanceName: "providerGetTask");
-  final AddTask _addTaskUseCase =
-      GetIt.I<AddTask>(instanceName: "providerAddTask");
+      GetIt.I<GetTask>(instanceName: "blocGetTask");
+  final AddTaskUseCase _addTaskUseCase =
+      GetIt.I<AddTaskUseCase>(instanceName: "blocAddTask");
+
   List<TaskModel> _tasks = [];
 
   Future<void> _init() async {

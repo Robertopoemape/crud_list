@@ -53,23 +53,23 @@ Future<void> initDependencies() async {
   getIt.registerFactory<GetTask>(
       () => GetTask(getIt<TaskRepository>(instanceName: 'provider')),
       instanceName: 'providerGetTask');
-  getIt.registerFactory<AddTask>(
-      () => AddTask(getIt<TaskRepository>(instanceName: 'provider')),
+  getIt.registerFactory<AddTaskUseCase>(
+      () => AddTaskUseCase(getIt<TaskRepository>(instanceName: 'provider')),
       instanceName: 'providerAddTask');
 
   // Para Riverpod:
   getIt.registerFactory<GetTask>(
       () => GetTask(getIt<TaskRepository>(instanceName: 'riverpod')),
       instanceName: 'riverpodGetTask');
-  getIt.registerFactory<AddTask>(
-      () => AddTask(getIt<TaskRepository>(instanceName: 'riverpod')),
+  getIt.registerFactory<AddTaskUseCase>(
+      () => AddTaskUseCase(getIt<TaskRepository>(instanceName: 'riverpod')),
       instanceName: 'riverpodAddTask');
 
   // Para Bloc:
   getIt.registerFactory<GetTask>(
       () => GetTask(getIt<TaskRepository>(instanceName: 'bloc')),
       instanceName: 'blocGetTask');
-  getIt.registerFactory<AddTask>(
-      () => AddTask(getIt<TaskRepository>(instanceName: 'bloc')),
+  getIt.registerFactory<AddTaskUseCase>(
+      () => AddTaskUseCase(getIt<TaskRepository>(instanceName: 'bloc')),
       instanceName: 'blocAddTask');
 }

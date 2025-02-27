@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:crud_list/presentation/flutter_bloc/pages/home_bloc_page.dart'
+import 'package:crud_list/presentation/flutter_bloc/pages/home_cubit_page.dart'
     as _i1;
 import 'package:crud_list/presentation/flutter_provider/pages/home_provider_page.dart'
     as _i3;
@@ -19,20 +19,20 @@ import 'package:crud_list/presentation/home/pages/home_page.dart' as _i2;
 import 'package:crud_list/presentation/splash/pages/splash_page.dart' as _i5;
 
 /// generated route for
-/// [_i1.HomeBlocPage]
-class HomeBlocRoute extends _i6.PageRouteInfo<void> {
-  const HomeBlocRoute({List<_i6.PageRouteInfo>? children})
+/// [_i1.HomeCubitPage]
+class HomeCubitRoute extends _i6.PageRouteInfo<void> {
+  const HomeCubitRoute({List<_i6.PageRouteInfo>? children})
       : super(
-          HomeBlocRoute.name,
+          HomeCubitRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomeBlocRoute';
+  static const String name = 'HomeCubitRoute';
 
   static _i6.PageInfo page = _i6.PageInfo(
     name,
     builder: (data) {
-      return const _i1.HomeBlocPage();
+      return const _i1.HomeCubitPage();
     },
   );
 }
