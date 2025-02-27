@@ -14,15 +14,14 @@ class TaskProvider with ChangeNotifier {
 
   final TaskStorage _storage = GetIt.I<TaskStorage>(instanceName: "provider");
   final GetTask _getTasksUseCase =
-      GetIt.I<GetTask>(instanceName: "blocGetTask");
+      GetIt.I<GetTask>(instanceName: "providerGetTask");
   final AddTaskUseCase _addTaskUseCase =
-      GetIt.I<AddTaskUseCase>(instanceName: "blocAddTask");
+      GetIt.I<AddTaskUseCase>(instanceName: "providerAddTask");
 
   List<TaskModel> _tasks = [];
 
   Future<void> _init() async {
     try {
-      await _storage.init();
       _refreshTasks();
     } catch (e) {
       print('Error al inicializar TaskProvider: $e');
